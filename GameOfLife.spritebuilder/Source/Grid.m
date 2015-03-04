@@ -48,4 +48,19 @@ static const int GRID_COLUMNS = 10;
     }
 }
 
+#pragma mark - Interaction methods
+
+- (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
+    // Se obtienen las coordenadas del toque
+    CGPoint touchLocation = [touch locationInNode:self];
+    // Se calcula la creature en ese punto
+    Creature *creature = [self creatureForTouchPosition:touchLocation];
+    // Si está viva la mata y viceversa
+    creature.isAlive = !creature.isAlive;
+}
+
+- (Creature *)creatureForTouchPosition:(CGPoint)touchPosition {
+    return _gridArray[(int)(touchPosition.x/_cellWidth)][(int)(touchPosition.y/_cellHeight)];
+}
+
 @end
