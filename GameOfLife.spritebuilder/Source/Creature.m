@@ -21,7 +21,6 @@
 
 - (void)setIsAlive:(BOOL)newState {
     _isAlive = newState;
-    // 'visible' is a property of any class that inherits from CCNode. CCSprite is a subclass of CCNode, and Creature is a subclass of CCSprite, so Creatures have a visible property
     self.visible = _isAlive;
 }
 
