@@ -48,6 +48,22 @@ static const int GRID_COLUMNS = 10;
     }
 }
 
+- (void)evolveStep {
+    [self cuentaVecinos];
+    [self updateCreatures];
+    _generation++;
+}
+
+#pragma mark - Private methods
+
+- (void)cuentaVecinos {
+    
+}
+
+- (void)updateCreatures {
+    
+}
+
 #pragma mark - Interaction methods
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
