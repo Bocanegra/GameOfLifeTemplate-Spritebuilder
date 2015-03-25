@@ -57,11 +57,51 @@ static const int GRID_COLUMNS = 10;
 #pragma mark - Private methods
 
 - (void)cuentaVecinos {
-    
+    for (int i=0; i<[_gridArray count]; i++) {
+        for (int j=0; i<[_gridArray[i] count]; j++) {
+            Creature *criatura = _gridArray[i][j];
+            criatura.livingNeighbors = 0;
+            
+            for (int x=(i-1); x<=(i+1); x++) {
+                for (int y=(j-1); y<=(j+1); y++) {
+                    
+                    if (!((x==i) && (y==j)) &&  // si no somos nosotros mismos
+                        [self isIndexValidForX:x andY:y]) {  // y la coordenada no se sale del array
+                        
+                        Creature *vecino = _gridArray[x][y];
+                        if (vecino.isAlive) {
+                            criatura.livingNeighbors ++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+- (BOOL)isIndexValidForX:(int)x andY:(int)y {
+    BOOL isIndexValid = YES;
+    if (x < 0 || y < 0 || x >= GRID_ROWS || y >= GRID_COLUMNS) {
+        isIndexValid = NO;
+    }
+    return isIndexValid;
 }
 
 - (void)updateCreatures {
-    
+    int numAlive = 0;
+    for (int i=0; i<[_gridArray count]; i++) {
+        for (int j=0; i<[_gridArray[i] count]; j++) {
+            Creature *criatura = _gridArray[i][j];
+            if (criatura.livingNeighbors == 3) {
+                criatura.isAlive = YES;
+                numAlive++;
+            } else if (criatura.livingNeighbors<=1 || criatura.livingNeighbors>=4) {
+                criatura.isAlive = NO;
+            }
+            
+        }
+    }
+    _totalAlive = numAlive;
 }
 
 #pragma mark - Interaction methods
