@@ -58,7 +58,7 @@ static const int GRID_COLUMNS = 10;
 
 - (void)cuentaVecinos {
     for (int i=0; i<[_gridArray count]; i++) {
-        for (int j=0; i<[_gridArray[i] count]; j++) {
+        for (int j=0; j<[_gridArray[i] count]; j++) {
             Creature *criatura = _gridArray[i][j];
             criatura.livingNeighbors = 0;
             
